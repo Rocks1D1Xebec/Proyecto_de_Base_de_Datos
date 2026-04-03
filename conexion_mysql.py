@@ -5,8 +5,8 @@ def conectar_db():
     return mysql.connector.connect(
         host="localhost",
         user="root",
-        password="",
-        database="tu_base_de_datos"
+        password="13440261",
+        database="Tienda_Juegos"
     )
 
 # menu principal
@@ -45,7 +45,7 @@ def iniciar_sesion():
     try:
         conexion = conectar_db()
         cursor = conexion.cursor(dictionary=True)
-        sql = "SELECT id_usuario, usuario, id_rol FROM Usuarios WHERE usuario = %s AND contraseña = %s"
+        sql = "SELECT id_usuario, usuario, id_rol FROM Usuario WHERE usuario = %s AND password  = %s"
         cursor.execute(sql, (usuario, password))
         usuario_db = cursor.fetchone()
 
@@ -96,7 +96,7 @@ def crear_cuenta():
         conexion = conectar_db()
         cursor = conexion.cursor()
         
-        sql = "INSERT INTO Usuarios (usuario, contraseña, email, id_rol) VALUES (%s, %s, %s, %s)"
+        sql = "INSERT INTO Usuario (usuario, password , email, id_rol) VALUES (%s, %s, %s, %s)"
         valores = (usuario, password, email, id_rol)
         
         cursor.execute(sql, valores)
@@ -118,3 +118,6 @@ def crear_cuenta():
             if 'cursor' in locals():
                 cursor.close()
             conexion.close()
+
+if __name__ == "__main__":
+    menu()
