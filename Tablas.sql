@@ -16,7 +16,10 @@ create table Usuario(
     foreign key (id_rol) references Rol(id_rol),
 	usuario varchar(50),
     password varchar(50),
-    email varchar(50)
+    email varchar(50),
+    
+    -- bloqueo de cuenta
+    estado enum ('activo','bloqueado') default 'activo'
 );
 SELECT * FROM Usuario;
 create table Juego(
